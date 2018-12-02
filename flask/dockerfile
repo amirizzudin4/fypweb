@@ -1,0 +1,19 @@
+FROM debian:jessie-slim AS base
+
+RUN apt-get update
+
+RUN apt-get install python3-dev -y
+
+RUN apt-get install python3-pip -y
+
+RUN pip3 install gunicorn  Flask
+
+WORKDIR /app
+
+COPY /backend /app
+
+EXPOSE 5000
+
+CMD gunicorn --bind 0.0.0.0:5000 wsgi:app
+
+

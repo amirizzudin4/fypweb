@@ -1,0 +1,9 @@
+FROM ubuntu:latest AS base
+
+RUN apt-get update && apt-get install nginx curl certbot -y
+
+# RUN apt-get install software-properties-common 
+
+
+
+COPY /conf.d/ /etc/nginx/conf.d/
