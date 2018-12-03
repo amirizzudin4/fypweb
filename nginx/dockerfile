@@ -1,9 +1,20 @@
 FROM ubuntu:latest AS base
 
-RUN apt-get update && apt-get install nginx curl certbot -y
+RUN apt-get update && apt-get install nginx -y
 
 # RUN apt-get install software-properties-common 
 
-
+# RUN rm /etc/nginx/sites-enabled/default
 
 COPY /conf.d/ /etc/nginx/conf.d/
+
+COPY /sites-available/ /etc/nginx/sites-available/
+
+COPY /sites-enable/ /etc/nginx/sites-enabled/
+
+EXPOSE 80
+
+EXPOSE 443
+
+# CMD sh -c "service nginx start"
+
