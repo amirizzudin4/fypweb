@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -29,4 +29,16 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.centerbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.formbox {
+    padding: 30px;
+    background: #cdd3d3;
 }
