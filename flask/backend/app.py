@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_socketio import SocketIO
+from flask_cors import CORS
 import tensorflow as tf
 import numpy as np
 import pandas as pd
@@ -19,6 +20,7 @@ from bs4 import NavigableString
 # init_notebook_mode(connected=True)
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/')
@@ -32,11 +34,12 @@ def original_data():
     if request.method == 'POST':
         if request.accept_mimetypes.accept_json:
             symbpost = request.get_json(force=True)
-            print(symbpost.symbol)
+            # print(symbpost['symbol'])
         else:
             symbpost = request.form['symbol']
 
-        url = 'https://finance.yahoo.com/quote/'+symbpost+'/history?p='+symbpost
+        url = 'https://finance.yahoo.com/quote/' + \
+            symbpost['symbol']+'/history?p='+symbpost['symbol']
     else:
         symb = request.args.get('symbol')
         url = 'https://finance.yahoo.com/quote/'+symb+'/history?p='+symb
@@ -46,7 +49,7 @@ def original_data():
     table_big = soup.find('table', attrs={'data-test': 'historical-prices'})
     soup.find('tfoot').decompose()
 
-    missing_values = ["n/a", "na", "-", "NaN"]
+    missing_values = ["n/a", "na", "-", "NaN", "null"]
     rs = pd.read_html(str(table_big), na_values=missing_values)
     rs = rs[0].to_json(orient='records')
 

@@ -28,7 +28,7 @@ class App extends Component {
       }
     })
       .then(function(response) {
-        console.log(response);
+        console.log(response.data);
       })
       .catch(function(error) {
         console.log(error);
