@@ -1,0 +1,15 @@
+FROM mhart/alpine-node AS base
+
+RUN apk update
+
+# RUN mkdir app
+
+WORKDIR /app
+
+COPY /react/ /app/
+
+# RUN npm install
+
+EXPOSE 3000
+
+CMD sh -c "npm install && npm start"

@@ -6,7 +6,9 @@ RUN apt-get install python3-dev -y
 
 RUN apt-get install python3-pip -y
 
-RUN pip3 install gunicorn  Flask
+RUN pip3 install gunicorn Flask flask-socketio flask-cors 
+
+# RUN mkdir app
 
 WORKDIR /app
 
