@@ -1,6 +1,12 @@
-FROM mhart/alpine-node AS base
+FROM ubuntu:latest AS base
 
-RUN apk update
+RUN apt-get update
+
+RUN apt install curl -y
+
+RUN curl -sL https://deb.nodesource.com/setup_8.x 
+
+RUN apt-get install nodejs npm -y
 
 # RUN mkdir app
 
@@ -12,4 +18,4 @@ COPY /react/ /app/
 
 EXPOSE 3000
 
-CMD sh -c "npm install && npm start"
+# CMD sh -c "npm install && npm start"
